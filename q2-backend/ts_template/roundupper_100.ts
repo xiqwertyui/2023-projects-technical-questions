@@ -84,10 +84,15 @@ export function dataBaseGetLassoableAnimal(cowBoyName: string) {
     const space_animals = spaceDatabase
         .filter(entry=>entry.type === "space_animal")
         .filter(animalInfo=>{
-            console.log(cowBoyInfo.metadata.lassoLength, cowBoyInfo.location, animalInfo.location)
+            // console.log(cowBoyInfo.metadata.lassoLength, cowBoyInfo.location, animalInfo.location)
             return isLassoable(cowBoyInfo.metadata.lassoLength, cowBoyInfo.location, animalInfo.location)
         })
-    console.log(space_animals)
+        .map((entry:{ type: "space_animal", metadata: spaceAnimal, location: location })=>{
+            return {
+                "type": entry.metadata.type,
+                "location": entry.location
+            };
+        })
     return {space_animals};
 }
 
