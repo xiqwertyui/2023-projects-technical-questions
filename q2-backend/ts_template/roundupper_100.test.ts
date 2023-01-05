@@ -57,7 +57,7 @@ describe('/entity',()=>{
                 "type": "flying_burger"
             },
             "location": {
-                "x": 0,
+                "x": 1,
                 "y": 1
             }
         },
@@ -106,7 +106,7 @@ describe('/entity',()=>{
         {
             "type": "flying_burger",
             "location": {
-                "x": 0,
+                "x": 1,
                 "y": 1
             } 
         }
