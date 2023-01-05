@@ -74,19 +74,16 @@ server.close(() => {
 
 
 export function dataBaseAdd(entities: spaceEntity []) {
-    spaceDatabase = spaceDatabase.concat(entities);
+    spaceDatabase = spaceDatabase.concat(entities);   // simply add all incoming entities into the spaceDatabase
     return {};
 }
 
 export function dataBaseGetLassoableAnimal(cowBoyName: string) {
-    const allCowBoyInfo = spaceDatabase.filter(entry=>entry.type === "space_cowboy") as any as { type: "space_cowboy", metadata: spaceCowboy, location: location } [];
+    const allCowBoyInfo = spaceDatabase.filter(entry=>entry.type === "space_cowboy") as { type: "space_cowboy", metadata: spaceCowboy, location: location } [];
     const cowBoyInfo = allCowBoyInfo.find(entry=>entry.metadata.name === cowBoyName) as { type: "space_cowboy", metadata: spaceCowboy, location: location };
     const space_animals = spaceDatabase
         .filter(entry=>entry.type === "space_animal")
-        .filter(animalInfo=>{
-            // console.log(cowBoyInfo.metadata.lassoLength, cowBoyInfo.location, animalInfo.location)
-            return isLassoable(cowBoyInfo.metadata.lassoLength, cowBoyInfo.location, animalInfo.location)
-        })
+        .filter(animalInfo=>isLassoable(cowBoyInfo.metadata.lassoLength, cowBoyInfo.location, animalInfo.location))
         .map((entry:{ type: "space_animal", metadata: spaceAnimal, location: location })=>{
             return {
                 "type": entry.metadata.type,
